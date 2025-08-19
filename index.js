@@ -1,7 +1,10 @@
 import 'dotenv/config';
 import { Telegraf, Markup } from 'telegraf';
 import fs from 'fs/promises';
+import express from "express";
 
+const app = express();
+const PORT = process.env.PORT || 3000;
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const OWNER_ID = Number(process.env.OWNER_ID);
 
@@ -506,4 +509,7 @@ bot.launch()
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
 
-console.log('⏳ Bot ishga tushmoqda...');
+// Express serverni ishga tushiramiz
+app.listen(PORT, () => {
+  console.log(`🌐 Express server http://localhost:${PORT} da ishlayapti`);
+});
